@@ -34,6 +34,8 @@ class UserRepository {
         } 
         catch(error){
             throw new DatabaseError('Erro na consulta por ID', error);
+        }finally {
+            db.query('commit')
         }
         
     }

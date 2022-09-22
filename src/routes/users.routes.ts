@@ -19,11 +19,7 @@ usersRoute.get('/users/:uuid', async (req: Request <{ uuid: string }>, res: Resp
     }
     catch (error){ 
        // console.log(error)
-        if (error instanceof DatabaseError) {
-            res.sendStatus(StatusCodes.BAD_REQUEST)
-        }else{
-            res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
-        }
+       next(error);
     }
 
    
