@@ -7,6 +7,9 @@ import userRepository from "../repositories/user.repository";
 const usersRoute = Router();
 
 usersRoute.get('/users',async(req: Request, res: Response, next: NextFunction)=>{
+    
+    console.log(req.headers['authorization'])
+
     const users = await userRepository.findAllUsers();
     res.status( StatusCodes.OK ).json(users);
 });
@@ -20,9 +23,7 @@ usersRoute.get('/users/:uuid', async (req: Request <{ uuid: string }>, res: Resp
     catch (error){ 
        // console.log(error)
        next(error);
-    }
-
-   
+    }  
 });
 
 usersRoute.post('/users', async(req: Request, res: Response, next: NextFunction)=>{
