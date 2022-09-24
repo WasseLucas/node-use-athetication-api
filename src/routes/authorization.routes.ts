@@ -16,8 +16,21 @@ authorizationRoute.post('/token', (req: Request, res: Response, next: NextFuncti
         const [authenticantioType , token] = authorizationHeader.split(' ');
 
         if (authenticantioType !== 'Basic' || !token){
+
             throw new ForbiddenError('Tipo de authentication invalido')
         };
+
+        const tokenContent =  Buffer.from(token, 'base64').toString('utf-8');
+
+        const[username, password] = tokenContent.split(':');
+
+        if(!username || !password){
+            throw new ForbiddenError('credenciais não preenchidas')
+        }
+
+        console.log(username, password)
+
+
 
     } catch(error){
 
